@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+{% block content %}
+
+<h1>Мой блог</h1>
+
+<form method="GET">
+    <input
+        type="text"
+        name="q"
+        placeholder="Поиск статьи..."
+    >
+
+    <button type="submit">
+        Найти
+    </button>
+</form>
+
+{% for post in posts %}
+
+<div class="card">
+
+    <h2>
+        <a href="{% url 'post_detail' post.id %}">
+            {{ post.title }}
+        </a>
+    </h2>
+
+    <p>
+        Автор: {{ post.author }}
+    </p>
+
+    <p>
+        {{ post.created_at }}
+    </p>
+
+</div>
+
+{% empty %}
+
+<p>Статей пока нет.</p>
+
+{% endfor %}
+
+{% endblock %}
